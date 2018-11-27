@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Form from '../components/Form'
 
 const Table = (props) => {
 
@@ -8,20 +9,32 @@ const Table = (props) => {
     })
   }
 
+  const addMoneyButtonListener = () => {
+    props.addMoneyButtonHandler()
+  }
+
+  const openForm = () => {
+    if(props.addMoneyClicked === true) {
+      return <Form formHandler={props.formHandler}/>
+    }
+  }
+
   return (
     <Fragment>
       <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
+        You have: ${props.wallet} remaining!
       </h1>
+      <button onClick={addMoneyButtonListener}>Add Money</button>
+      {openForm()}
       <div className="table">
         <div className="stack">
           {
-            /* 
-               renderPlates takes an array 
+            /*
+               renderPlates takes an array
                and renders an empty plate
                for every element in the array
             */
-            renderPlates([])
+            renderPlates(props.eatenSushi)
           }
         </div>
       </div>
